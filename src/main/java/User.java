@@ -1,3 +1,7 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class User {
@@ -38,11 +42,16 @@ public class User {
 	}
 	
 	public boolean UserExist(User user) {
-		for (int i=0;i< Liste_Users.size();i++) {
-			if (Liste_Users[i]==user) then
-				return true
-		}
-		return false;
+		//récupérer le login et le mot de passe
+		//faire une recherche dans la table sql pour voir si elle existe
+		Connection Con = null;
+		Class.forName("");
+		Con = DriverManager.getConnection("");
+		Statement statement = Con.createStatement();
+		ResultSet rs = statement.executeQuery("SELECT...WHERE...");
+		if (rs==1) then return true;
+		else return false;
+		Con.close();
 	}
 	
 	public boolean VerifPassword() {

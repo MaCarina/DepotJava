@@ -5,7 +5,6 @@ public class DataBaseManager {
 	
 	public ArrayList<User> Discussion;
 	public ArrayList<Message> Liste_messages;
-	public ArrayList<User> Liste_Users;
 	
 	public DataBaseManager() {
 		ArrayList<User> Discussion = new ArrayList<User>();
@@ -22,7 +21,7 @@ public class DataBaseManager {
 	public void addMessages(Message M,User user1,User user2) {
 		//aller chercher le numéro de discussion dans la liste discussion entre user1 et user2
 		//ajouter le message avec ce numéro de discussion dans la liste messages
-		if ()
+		if ((==user1 && ==user2) | (==))
 	}
 	
 	public void addUser(User user){
