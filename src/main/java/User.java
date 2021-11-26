@@ -36,4 +36,16 @@ public class User {
 	public void modifyPseudo(){
 		
 	}
+	
+	public boolean UserExist(User user) {
+		for (int i=0;i< Liste_Users.size();i++) {
+			if (Liste_Users[i]==user) then
+				return true
+		}
+		return false;
+	}
+	
+	public boolean VerifPassword() {
+		return true;
+	}
 }
