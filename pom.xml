@@ -33,6 +33,13 @@
 </dependency>
   </dependencies>
   <build>
-    <finalName>ProjetCOO</finalName>
+      <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.3.1</version>
+        </plugin>
+    </plugins>
+     <finalName>ProjetCOO</finalName>
   </build>
 </project>
