@@ -1,12 +1,10 @@
-package Test.Test;
-
 import java.io.IOException;
 import javafx.fxml.FXML;
 
-public class PrimaryController {
+public class Authentification_controller {
 
     @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
+    private void switchToStart() throws IOException {
+        App.setRoot("Authentification");
     }
 }
