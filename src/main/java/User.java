@@ -37,7 +37,7 @@ public class User {
 		return this.etat;
 	}
 	
-	public boolean PseudoValide(String pswd){
+	public static boolean PseudoValide(String pseudo){
 		//doit regarder dans la BDD tous les pseudos
 		return true;
 	}
@@ -54,6 +54,8 @@ public class User {
 			statement = connection.createStatement();
 		} catch (SQLException e) {
 			System.out.println("Erreur en se connectant à la database"+e);
+		} catch (ClassNotFoundException c) {
+			System.out.println("Erreur en se connectant à la database: classe non trouvée"+c);
 		}
 	}
 	

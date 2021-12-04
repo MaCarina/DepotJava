@@ -25,7 +25,7 @@ public class Start_controller {
     private ResourceBundle resources;
      
     // Add a public no-args constructor
-    public FxFXMLController() 
+    public void FxFXMLController() 
     {
     }
      
@@ -37,6 +37,13 @@ public class Start_controller {
     @FXML
     private void handler() 
     {
+    	String pseudo1= pseudo.getText();
+    	if (!User.PseudoValide(pseudo1)) {
+    		// message d'erreur: pseudo non valide
+    	} else {
+    		// set pseudo pour le user
+    		// la classe doit avoir un attribut pseudo
+    	}
         //outputText.setText(inputText.getText());
     }
 
