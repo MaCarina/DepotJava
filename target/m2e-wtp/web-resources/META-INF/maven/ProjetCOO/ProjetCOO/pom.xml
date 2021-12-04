@@ -32,6 +32,16 @@
 	    <version>2.2.1</version>
 	    <scope>provided</scope>
 	</dependency>
+	<dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17</version>
+	</dependency>
+	<dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>17</version>
+     </dependency>
   </dependencies>
   <build>
       <plugins>
@@ -40,6 +50,21 @@
             <artifactId>maven-war-plugin</artifactId>
             <version>3.3.1</version>
         </plugin>
+        <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <executions>
+                    <execution>
+                        <!-- Default configuration for running -->
+                        <!-- Usage: mvn clean javafx:run -->
+                        <id>default-cli</id>
+                        <configuration>
+                            <mainClass>org.openjfx.hellofx.App</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+ 		</plugin>
     </plugins>
      <finalName>ProjetCOO</finalName>
   </build>
