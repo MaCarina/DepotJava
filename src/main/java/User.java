@@ -14,13 +14,15 @@ public class User {
 	public ArrayList<User> activeMembers;
 	public static Statement statement;
 	public static Connection connection;
+	public static int id=0;
 	
-	public User(String login,String password,String pseudo,boolean etat,ArrayList<User> activeMembers){
+	User(String login,String password,String pseudo){
 		this.login = login;
 		this.password = password;
 		this.pseudo = pseudo;
-		this.etat = etat;
-		this.activeMembers = activeMembers;
+		this.etat = true;
+		this.activeMembers = null;
+		this.id++;
 	}
 	
 	public void setPseudo(String pseudo){
@@ -64,14 +66,15 @@ public class User {
 		ResultSet rs = statement.executeQuery("SELECT * FROM User WHERE login='"+user+"'");
 		if (rs.next()) {
 			if (user.equals(rs.getString(2))) {
-				System.out.println("user OK");
+				System.out.println("l'utilisateur existe");
 				return true;
 			}else {
 				return false;
 			}
 		}else {
 			//Créer l'user
-			int c = statement.executeUpdate("INSERT INTO `mydb`.`user` (`idUser`, `login`, `password`) VALUES ('100', '"+user+"','"+p+"')");
+			id++;
+			int c = statement.executeUpdate("INSERT INTO `mydb`.`user` (`idUser`, `login`, `password`) VALUES ('"+Integer.toString(id)+"', '"+user+"','"+p+"')");
 			System.out.println("user ajouté");
 			//gérer idUser avec une var globale
 		}
@@ -94,27 +97,5 @@ public class User {
 			}
 		}
 		return false;
-	}
-	/*
-	public static boolean VerifPassword(String p) throws SQLException, ClassNotFoundException {
-		//Connexion();
-		String req = "SELECT * FROM User where password='carina'";
-		System.out.println("**********"+req);
-		ResultSet rs1 = statement.executeQuery(req);
-		
-	 if (rs1.next()) {
-			System.out.println("je rentre ici");
-			if (p.equals(rs1.getString(2))) {
-				System.out.println("je vais bien");
-				return true;
-			}
-		}
-		return false;
-	}
-	*/
-	public void main (String args[]) throws ClassNotFoundException, SQLException {
-		Connexion();
-		System.out.println("je suis connectée\n");
-		FinConnexion();
 	}
 }
