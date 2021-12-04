@@ -12,8 +12,8 @@ public class User {
 	public String pseudo;
 	public boolean etat;
 	public ArrayList<User> activeMembers;
-	public Statement statement;
-	public Connection Con;
+	public static Statement statement;
+	public static Connection connection;
 	
 	public User(String login,String password,String pseudo,boolean etat,ArrayList<User> activeMembers){
 		this.login = login;
@@ -44,35 +44,74 @@ public class User {
 		
 	}
 	
-	public void Connexion() throws SQLException, ClassNotFoundException {
-		Con = null;
-		Class.forName("com.mysql.jdbc.Driver");
-		Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb");
-		statement = Con.createStatement();
+	public static void Connexion() throws SQLException, ClassNotFoundException {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","1029");
+			System.out.println("Connexion ok");
+			statement = connection.createStatement();
+		} catch (SQLException e) {
+			System.out.println("Erreur en se connectant à la database"+e);
+		}
 	}
 	
-	public void FinConnexion() throws SQLException {
-		Con.close();
+	public static void FinConnexion() throws SQLException {
+		connection.close();
 	}
 	
-	public boolean UserExist(String user) throws SQLException, ClassNotFoundException {
-		//récupérer le login et le mot de passe
-		//faire une recherche dans la table sql pour voir si elle existe
-		ResultSet rs = statement.executeQuery("SELECT login FROM User WHERE login=user");
-		//if (rs==1) then return true;
-		//else return false;
-		FinConnexion();
-		return true;
+	public static boolean UserExist(String user,String p) throws SQLException, ClassNotFoundException {
+		Connexion();
+		ResultSet rs = statement.executeQuery("SELECT * FROM User WHERE login='"+user+"'");
+		if (rs.next()) {
+			if (user.equals(rs.getString(2))) {
+				System.out.println("user OK");
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			//Créer l'user
+			int c = statement.executeUpdate("INSERT INTO `mydb`.`user` (`idUser`, `login`, `password`) VALUES ('100', '"+user+"','"+p+"')");
+			System.out.println("user ajouté");
+			//gérer idUser avec une var globale
+		}
+		return false;
 	}
 	
-	public boolean VerifPassword(String pswd) throws SQLException {
-		ResultSet rs = statement.executeQuery("SELECT login FROM User WHERE passwd=pswd");
-		//if (rs==1) then return true;
-		//else return false;
-		FinConnexion();
-		return true;
+	public static boolean VerifPassword(String user,String pswd) throws SQLException, ClassNotFoundException {
+		Connexion();
+		ResultSet rs = statement.executeQuery("SELECT * FROM User WHERE login='"+user+"'");
+		if (rs.next()) {
+			if (user.equals(rs.getString(2))) {
+				System.out.println("user OK");
+			}else {
+				return false;
+			}
+			if (pswd.equals(rs.getString(3))) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+		return false;
 	}
-	
+	/*
+	public static boolean VerifPassword(String p) throws SQLException, ClassNotFoundException {
+		//Connexion();
+		String req = "SELECT * FROM User where password='carina'";
+		System.out.println("**********"+req);
+		ResultSet rs1 = statement.executeQuery(req);
+		
+	 if (rs1.next()) {
+			System.out.println("je rentre ici");
+			if (p.equals(rs1.getString(2))) {
+				System.out.println("je vais bien");
+				return true;
+			}
+		}
+		return false;
+	}
+	*/
 	public void main (String args[]) throws ClassNotFoundException, SQLException {
 		Connexion();
 		System.out.println("je suis connectée\n");
