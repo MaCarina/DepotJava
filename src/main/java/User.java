@@ -27,6 +27,12 @@ public class User {
 		this.nb_user++;
 	}
 	
+	User(ResultSet rs) throws SQLException {
+		this.login=rs.getString(2);
+		this.password=rs.getString(3);
+		this.etat=rs.getBoolean(4);
+	}
+	
 	public void setPseudo(String pseudo){
 		this.pseudo = pseudo;
 	}
@@ -51,7 +57,7 @@ public class User {
 	public static void Connexion() throws SQLException, ClassNotFoundException {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","1029");
+			Connection connection = DriverManager.getConnection("jdbc:mysql://srv-bdens.insa-toulouse.fr:3306/tp_servlet_002","tp_servlet_002","fi6Cho0e");
 			System.out.println("Connexion ok");
 			statement = connection.createStatement();
 		} catch (SQLException e) {
@@ -67,7 +73,7 @@ public class User {
 	
 	public static boolean UserExist(String user,String p) throws SQLException, ClassNotFoundException {
 		Connexion();
-		ResultSet rs = statement.executeQuery("SELECT * FROM User WHERE login='"+user+"'");
+		ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE login='"+user+"'");
 		if (rs.next()) {
 			if (user.equals(rs.getString(2))) {
 				System.out.println("l'utilisateur existe");
@@ -78,7 +84,7 @@ public class User {
 		}else {
 			//Créer l'user
 			id++;
-			int c = statement.executeUpdate("INSERT INTO `mydb`.`user` (`idUser`, `login`, `password`) VALUES ('"+Integer.toString(id)+"', '"+user+"','"+p+"')");
+			int c = statement.executeUpdate("INSERT INTO `tp_servlet_002`.`user` (`idUser`, `login`, `password`) VALUES ('100', '"+user+"','"+p+"')");
 			System.out.println("user ajouté");
 			//gérer idUser avec une var globale
 		}
@@ -106,12 +112,11 @@ public class User {
 	
 	public static ArrayList<User> ActiveUsers () throws SQLException, ClassNotFoundException{
 		Connexion();
-		ResultSet rs = statement.executeQuery("SELECT * FROM User WHERE etat='1'");
+		ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE etat='1'");
 		ArrayList<User> liste = new ArrayList<User>(nb_user);
-		if (rs.next()) {
-			liste.add((User) rs);
-		}else {
-				return liste;
+		while(rs.next()) {
+			liste.add(new User(rs));
+			System.out.println("id = "+rs.getInt(1)+" login = "+rs.getString(2)+" password = "+rs.getString(3)+" etat = "+rs.getInt(4));
 		}
 		return liste;
 		

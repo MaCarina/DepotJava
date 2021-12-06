@@ -11,7 +11,7 @@ public class DbConnect {
 	public static void main(String[] args) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 		try {
-			/*User.User("carina","caca","caca");
+			//User.User("carina","caca","caca");
 			
 			User.UserExist("idio", "null");
 			/*if (User.VerifPassword("carina","hello")) {
@@ -20,7 +20,8 @@ public class DbConnect {
 				System.out.println("Mauvais mot de passe");
 			}*/
 			System.out.println("je rame pas");
-			User.FinConnexion();
+			User.ActiveUsers();
+			//User.FinConnexion();
 		} catch (SQLException e) {
 			System.out.println("Erreur en se connectant à la database"+e);
 		}
