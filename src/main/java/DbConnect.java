@@ -11,7 +11,7 @@ public class DbConnect {
 	public static void main(String[] args) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 		try {
-			User.User("carina","caca","caca");
+			/*User.User("carina","caca","caca");
 			
 			User.UserExist("idio", "null");
 			/*if (User.VerifPassword("carina","hello")) {

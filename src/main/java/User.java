@@ -11,7 +11,8 @@ public class User {
 	public String password;
 	public String pseudo;
 	public boolean etat;
-	public ArrayList<User> activeMembers;
+	public static ArrayList<User> activeMembers;
+	public static int nb_user=0;
 	public static Statement statement;
 	public static Connection connection;
 	public static int id=0;
@@ -23,6 +24,7 @@ public class User {
 		this.etat = true;
 		this.activeMembers = null;
 		this.id++;
+		this.nb_user++;
 	}
 	
 	public void setPseudo(String pseudo){
@@ -83,6 +85,7 @@ public class User {
 		return false;
 	}
 	
+	
 	public static boolean VerifPassword(String user,String pswd) throws SQLException, ClassNotFoundException {
 		Connexion();
 		ResultSet rs = statement.executeQuery("SELECT * FROM User WHERE login='"+user+"'");
@@ -99,5 +102,18 @@ public class User {
 			}
 		}
 		return false;
+	}
+	
+	public static ArrayList<User> ActiveUsers () throws SQLException, ClassNotFoundException{
+		Connexion();
+		ResultSet rs = statement.executeQuery("SELECT * FROM User WHERE etat='1'");
+		ArrayList<User> liste = new ArrayList<User>(nb_user);
+		if (rs.next()) {
+			liste.add((User) rs);
+		}else {
+				return liste;
+		}
+		return liste;
+		
 	}
 }

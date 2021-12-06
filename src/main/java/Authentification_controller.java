@@ -44,18 +44,20 @@ public class Authentification_controller {
     }
      
     @FXML
-    private void handler() throws ClassNotFoundException, SQLException 
+    private void handler() throws ClassNotFoundException, SQLException, IOException
     {
     	String pseudo1= pseudo.getText();
     	String login1= login.getText();
     	String password1= password.getText();
-    	if (!User.PseudoValide(pseudo1)) {
+    	App.setRoot("Start");
+    	/*if (!User.PseudoValide(pseudo1)) {
     		// message d'erreur: pseudo non valide
     	} else {
     		if (User.UserExist(login1, password1)) {
     			if (User.VerifPassword(login1,password1)) {
     				// connexion: passage à la page suivante
-    				FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
+    				App.setRoot("Start");
+    				/*FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
     		        Stage stage = (Stage) btn.getScene().getWindow();
     		        Start = new Scene((Parent) loader.load());
     		        stage.setScene(Start);
@@ -66,13 +68,13 @@ public class Authentification_controller {
     		} else {
     			// création d'un nouveau user
     		}
-    	}
+    	}*/
         //outputText.setText(inputText.getText());
     }
 	
     // à quoi sert cette fonction
     @FXML
     private void switchToStart() throws IOException {
-        App.setRoot("Authentification");
+        App.setRoot("Start");
     }
 }
