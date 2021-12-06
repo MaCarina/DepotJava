@@ -7,19 +7,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<fx:root type="Scene" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AuthentificationController">
+<fx:root type="Scene" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Authentification_controller">
     <AnchorPane prefHeight="200" prefWidth="200">
       <children>
          <VBox layoutX="3.0" prefHeight="247.0" prefWidth="197.0">
             <children>
                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez entrer vos informations" wrappingWidth="196.21630859375" />
                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Login" translateY="20.0" wrappingWidth="193.21630859375" />
-               <TextField translateY="20.0" />
+               <TextField fx:id="login" translateY="20.0" />
                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe" translateY="30.0" wrappingWidth="185.21630859375" />
-               <TextField layoutX="10.0" layoutY="44.0" translateY="30.0" />
+               <TextField fx:id="password" layoutX="10.0" layoutY="44.0" translateY="30.0" />
                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pseudo" translateY="40.0" wrappingWidth="195.21630859375" />
-               <TextField translateY="40.0" />
-               <Button mnemonicParsing="false" text="Valider" translateX="70.0" translateY="50.0" />
+               <TextField fx:id="pseudo" translateY="40.0" />
+               <Button fx:id="valider" mnemonicParsing="false" onAction="#handler" text="Valider" translateX="70.0" translateY="50.0" />
             </children>
          </VBox>
       </children></AnchorPane>
